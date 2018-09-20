@@ -15,7 +15,7 @@ class LoginScreen extends Component{
             return;
         }
         firebase.auth().signInWithEmailAndPassword(this.state.email,this.state.password)
-        .then(() => {this.props.navigation.navigate('Home')})
+        .then(() => {this.props.navigation.navigate('Tabs')})
         .catch((error) => {alert(error)})
         ;
     }

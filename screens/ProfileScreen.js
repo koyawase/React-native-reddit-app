@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
-class HomeScreen extends Component{
+class ProfileScreen extends Component{
 
     static navigationOptions = {
-        tabBarLabel: 'Home',
+        tabBarLabel: 'Profile'
     }
     
     render() {
@@ -18,10 +18,10 @@ class HomeScreen extends Component{
                 }
             }
                 >
-                <Text>Home</Text>
+                <Text>Profile</Text>
             </View>
         );
 	}
 }
 
-export default HomeScreen;
+export default ProfileScreen;
