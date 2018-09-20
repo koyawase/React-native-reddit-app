@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Button, TextInput } from 'react-native';
+import { View, Button, TextInput, Text, StyleSheet } from 'react-native';
 import firebase from 'firebase';
 
 class LoginScreen extends Component{
@@ -23,13 +23,16 @@ class LoginScreen extends Component{
     render() {
         return (
             <View>
-                <TextInput 
+                <Text style={styles.title}> iReact</Text>
+                <TextInput  
+                    style={styles.textbox}
                     label='Email Address'
                     placeholder='Email'
                     value={this.state.email}
                     onChangeText={email => this.setState({ email })}
                 />    
                 <TextInput 
+                    style={styles.textbox}
                     label='Password'
                     autoCorrect={false}
                     placeholder='Password'
@@ -37,9 +40,14 @@ class LoginScreen extends Component{
                     value={this.state.password}
                     onChangeText={password => this.setState({ password })}
                     />
-                    <Button onPress={this.login} title="Log in" />
 
+                <Button
+                 style={styles.button}
+                 onPress={this.login} title="Log in" 
+                 />
+                <Text style={styles.spacing}></Text>
 				<Button
+                 style={styles.button}
                  onPress={() => this.props.navigation.navigate('Register')}
 				 title="Register" 
 				 color="grey"
@@ -48,5 +56,23 @@ class LoginScreen extends Component{
         );
 	}
 }
+
+const styles = StyleSheet.create({
+ title: {
+     textAlign: 'center',
+     fontWeight: 'bold',
+     fontSize: 18,
+     padding: 20
+ },
+ textbox: {
+    
+ },
+ button: {
+     marginTop: 20
+ },
+ spacing: {
+    margin: 5
+ }
+})
 
 export default LoginScreen;
