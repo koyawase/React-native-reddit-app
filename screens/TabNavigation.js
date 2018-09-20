@@ -14,7 +14,12 @@ const MainScreenNavigator = TabNavigator({
 	Tab1: {screen: HomeScreen},
 	Tab2: {screen: LikesScreen},
 	Tab3: {screen: ProfileScreen}
-})
+},
+	{
+		tabBarPosition: 'bottom',
+		swipeEnabled: true,
+	}
+)
 
 MainScreenNavigator.navigationOptions = {
 	header: null
