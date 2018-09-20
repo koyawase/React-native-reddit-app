@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { View, Button, Alert } from 'react-native';
-import { TitledInput } from '../components/TitledInput';
+import { View, Button, TextInput } from 'react-native';
 import firebase from 'firebase';
 
 class LoginScreen extends Component{
@@ -24,16 +23,16 @@ class LoginScreen extends Component{
     render() {
         return (
             <View>
-                <TitledInput 
+                <TextInput 
                     label='Email Address'
-                    placeholder='you@domain.com'
+                    placeholder='Email'
                     value={this.state.email}
                     onChangeText={email => this.setState({ email })}
                 />    
-                <TitledInput 
+                <TextInput 
                     label='Password'
                     autoCorrect={false}
-                    placeholder='*******'
+                    placeholder='Password'
                     secureTextEntry
                     value={this.state.password}
                     onChangeText={password => this.setState({ password })}
