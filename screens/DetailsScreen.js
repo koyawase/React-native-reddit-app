@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button, Linking } from 'react-native';
+import { Card } from 'react-native-elements';
+import Test from '../'
 
 class DetailsScreen extends Component{
 
@@ -10,16 +12,45 @@ class DetailsScreen extends Component{
 
     constructor(props){
         super(props);
-        this.state = { post: this.props.navigation.state.params.data};
+        cardUri = '';
+        if(this.props.navigation.state.params.data.preview != undefined){
+            cardUri = this.props.navigation.state.params.data.preview.images[0].source.url;
+        }
+        else{
+            cardUri = 'http://i.imgur.com/sdO8tAw.png';
+        }
+        this.state = { post: this.props.navigation.state.params.data, uri: cardUri};
+        
     }
     
     render() {
 
         return (
             <View>
-                <Text> {"Title: " + this.state.post.title}</Text>
-                <Text>{"Author: " + this.state.post.author}</Text>
+                <Card
+                title={this.state.post.title}
+                //image={{uri: this.state.post.preview.images[0].source.url}} defaultSource={require("../images/reddit-logo.png")} 
+                image={{uri: this.state.uri}}
+                >
+                <Text style={{marginBottom: 10}}>
+                    {'Author: ' + this.state.post.author}
+                </Text>
+                <Text style={{marginBottom: 10}}>
+                    {'Likes: ' + this.state.post.score}
+                </Text>
+                <Text style={{marginBottom: 10}}>
+                    {'Comments: ' + this.state.post.num_comments}
+                </Text>
+                
+                <Button
+                 onPress={() => Linking.openURL('http://reddit.com/'+this.state.post.permalink)}
+				 title="View on Reddit" 
+				 />
+
+                </Card>
             </View>
+                
+            
         );
 	}
 }

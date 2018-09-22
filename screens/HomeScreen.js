@@ -19,9 +19,7 @@ class HomeScreen extends Component{
         return fetch('https://www.reddit.com/r/'+this.state.category+'/top.json?limit=50')
         .then((response) => response.json())
         .then((responseJson) => {
-            console.log(responseJson.data.children);
             this.setState( {posts: responseJson.data.children});
-            console.log(this.state.posts);
         })
         .catch((error) => {
             console.log('error ' + error);
