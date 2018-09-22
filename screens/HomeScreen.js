@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
+import { List, ListItem } from 'react-native-elements';
 
 class HomeScreen extends Component{
 
@@ -14,7 +15,7 @@ class HomeScreen extends Component{
         this.getRedditPosts();
     }
 
-     getRedditPosts(){
+     getRedditPosts = async() =>{
         return fetch('https://www.reddit.com/r/'+this.state.category+'/top.json?limit=50')
         .then((response) => response.json())
         .then((responseJson) => {
@@ -30,16 +31,21 @@ class HomeScreen extends Component{
     render() {
 
         return (
-            <View style={
-                {
-                    flex:1,
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }
-            }
-                >
-                <Text>Home</Text>
-            </View>
+            <List>
+                <FlatList
+                    data={this.state.likedPosts}
+                    renderItem={({item}) =>(
+                        <ListItem
+                            roundAvatar
+                            title={item.data.title}
+                            subtitle={item.data.author}
+                            avatar={item.data.thumbnail}
+                            hideChevron
+                        />
+                    )}
+                />
+
+            </List>
         );
 	}
 }
