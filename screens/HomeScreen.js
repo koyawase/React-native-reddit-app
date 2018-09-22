@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 
 class HomeScreen extends Component{

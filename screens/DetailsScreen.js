@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Button, Linking } from 'react-native';
 import { Card } from 'react-native-elements';
-import Test from '../'
 
 class DetailsScreen extends Component{
 
