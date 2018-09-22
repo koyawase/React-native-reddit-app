@@ -4,7 +4,7 @@ import { List, ListItem } from 'react-native-elements';
 
 class HomeScreen extends Component{
 
-    state = {category: '', likedPosts: []};
+    state = {category: '', posts: []};
     static navigationOptions = {
         tabBarLabel: 'Home',
     }
@@ -20,8 +20,8 @@ class HomeScreen extends Component{
         .then((response) => response.json())
         .then((responseJson) => {
             console.log(responseJson.data.children);
-            this.setState( {likedPosts: responseJson.data.children});
-            console.log(this.state.likedPosts);
+            this.setState( {posts: responseJson.data.children});
+            console.log(this.state.posts);
         })
         .catch((error) => {
             console.log('error ' + error);
@@ -31,9 +31,9 @@ class HomeScreen extends Component{
     render() {
 
         return (
-            <List>
+            <List containerStyle={{borderTopWidth:0, borderBottomWidth: 0}}>
                 <FlatList
-                    data={this.state.likedPosts}
+                    data={this.state.posts}
                     renderItem={({item}) =>(
                         <ListItem
                             roundAvatar
@@ -41,13 +41,15 @@ class HomeScreen extends Component{
                             subtitle={item.data.author}
                             avatar={item.data.thumbnail}
                             hideChevron
+                            button onPress={() => this.props.navigation.navigate('Details', {data: item.data})}
                         />
                     )}
                 />
 
             </List>
         );
-	}
+    }
+
 }
 
 export default HomeScreen;
