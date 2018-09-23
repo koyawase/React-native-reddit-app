@@ -30,7 +30,7 @@ class HomeScreen extends Component{
     render() {
 
         return (
-            <List>
+            <List containerStyle={{ marginTop: 0, borderTopWidth: 0, borderBottomWidth: 0 }}>
             <SearchBar 
             round
             lightTheme
