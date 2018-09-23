@@ -28,6 +28,7 @@ class LoginScreen extends Component{
                     style={styles.textbox}
                     label='Email Address'
                     placeholder='Email'
+                    underlineColorAndroid = 'grey'
                     value={this.state.email}
                     onChangeText={email => this.setState({ email })}
                 />    
@@ -36,6 +37,7 @@ class LoginScreen extends Component{
                     label='Password'
                     autoCorrect={false}
                     placeholder='Password'
+                    underlineColorAndroid = 'grey'
                     secureTextEntry
                     value={this.state.password}
                     onChangeText={password => this.setState({ password })}

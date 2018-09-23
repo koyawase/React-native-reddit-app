@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
-import { List, ListItem } from 'react-native-elements';
+import { List, ListItem, SearchBar } from 'react-native-elements';
 
 class HomeScreen extends Component{
 
-    state = {category: '', posts: []};
+
+    state = {category: '', posts: [], searchQuery: ''};
     static navigationOptions = {
         tabBarLabel: 'Home',
     }
@@ -29,8 +30,15 @@ class HomeScreen extends Component{
     render() {
 
         return (
-            <List containerStyle={{borderTopWidth:0, borderBottomWidth: 0}}>
+            <List>
+            <SearchBar 
+            round
+            lightTheme
+            onChangeText={query => this.setSearchQuery(query)}
+            placeholder={'search'}
+            />
                 <FlatList
+                    automaticallyAdjustContentInsets={false}
                     data={this.state.posts}
                     renderItem={({item}) =>(
                         <ListItem
@@ -47,6 +55,12 @@ class HomeScreen extends Component{
             </List>
         );
     }
+
+    setSearchQuery(query){
+        this.state.category = query;
+        this.getRedditPosts();
+    }
+
 
 }
 

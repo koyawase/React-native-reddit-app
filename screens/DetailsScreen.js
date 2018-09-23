@@ -28,7 +28,6 @@ class DetailsScreen extends Component{
             <View>
                 <Card
                 title={this.state.post.title}
-                //image={{uri: this.state.post.preview.images[0].source.url}} defaultSource={require("../images/reddit-logo.png")} 
                 image={{uri: this.state.uri}}
                 >
                 <Text style={{marginBottom: 10}}>
