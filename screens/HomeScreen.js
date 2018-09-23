@@ -11,7 +11,6 @@ class HomeScreen extends Component{
     }
     
     componentDidMount(){
-        console.log('Home page loaded');
         this.state.category = 'popular';
         this.getRedditPosts();
     }
@@ -21,6 +20,7 @@ class HomeScreen extends Component{
         .then((response) => response.json())
         .then((responseJson) => {
             this.setState( {posts: responseJson.data.children});
+            console.log(this.state.posts);
         })
         .catch((error) => {
             console.log('error ' + error);
