@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, Button, Linking } from 'react-native';
+import { View, Text, Button, StyleSheet, Linking } from 'react-native';
 import { Card } from 'react-native-elements';
+import firebase from 'firebase';
 
 class DetailsScreen extends Component{
 
@@ -45,12 +46,29 @@ class DetailsScreen extends Component{
 				 title="View on Reddit" 
 				 />
 
+                <Text style={styles.spacing}></Text>
+
+                <Button 
+                onPress={() => this.likePost()}
+                title="Like Post"
+                color="grey"
+                />
                 </Card>
             </View>
                 
             
         );
-	}
+    }
+    
+    likePost(){
+        firebase.database().ref('/users/'+firebase.auth().currentUser.uid).push(this.state.post);
+    }
 }
+
+const styles = StyleSheet.create({
+    spacing: {
+       margin: 5
+    }
+   })
 
 export default DetailsScreen;
