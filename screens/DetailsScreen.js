@@ -19,8 +19,15 @@ class DetailsScreen extends Component{
         else{
             cardUri = 'http://i.imgur.com/sdO8tAw.png';
         }
-        this.state = { post: this.props.navigation.state.params.data, uri: cardUri};
+        this.state = { post: this.props.navigation.state.params.data, uri: cardUri, key: ''};
         
+        firebase.database().ref('/users/'+firebase.auth().currentUser.uid).on('value', (childSnapshot) => {
+            childSnapshot.forEach((val) => {
+                if(val.toJSON().permalink == this.state.post.permalink){
+                    this.state.key = val.key;
+                }
+            });
+        })
     }
     
     render() {
@@ -53,6 +60,13 @@ class DetailsScreen extends Component{
                 title="Like Post"
                 color="grey"
                 />
+
+                <Text style={styles.spacing}></Text>
+
+                <Button 
+                onPress={() => this.unlikePost()}
+                title="Unlike Post"
+                />
                 </Card>
             </View>
                 
@@ -62,6 +76,12 @@ class DetailsScreen extends Component{
     
     likePost(){
         firebase.database().ref('/users/'+firebase.auth().currentUser.uid).push(this.state.post);
+    }
+
+    unlikePost(){
+        if(this.state.key != ''){
+            firebase.database().ref('/users/'+firebase.auth().currentUser.uid).child(this.state.key).remove();
+        }
     }
 }
 

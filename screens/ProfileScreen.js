@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import firebase from 'firebase'
 
 class ProfileScreen extends Component{
 
@@ -18,7 +19,7 @@ class ProfileScreen extends Component{
                 }
             }
                 >
-                <Text>Profile</Text>
+                <Text>{'Logged in as ' + firebase.auth().currentUser.email}</Text>
             </View>
         );
 	}

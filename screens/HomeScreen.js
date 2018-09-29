@@ -20,7 +20,6 @@ class HomeScreen extends Component{
         .then((response) => response.json())
         .then((responseJson) => {
             this.setState( {posts: responseJson.data.children});
-            console.log(this.state.posts);
         })
         .catch((error) => {
             console.log('error ' + error);
