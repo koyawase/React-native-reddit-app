@@ -8,6 +8,20 @@ class ProfileScreen extends Component{
         tabBarLabel: 'Profile'
     }
     
+    state = {likedPosts: 0}
+
+    componentDidMount(){
+        this.getLikedPosts();
+    }
+
+    getLikedPosts = async() =>{
+        firebase.database().ref('/users/'+firebase.auth().currentUser.uid).on('value', 
+            post => {
+                this.setState({likedPosts: post.numChildren()})
+            }
+        );
+    }
+
     render() {
 
         return (
@@ -20,6 +34,7 @@ class ProfileScreen extends Component{
             }
                 >
                 <Text>{'Logged in as ' + firebase.auth().currentUser.email}</Text>
+                <Text>{'Liked posts ' + this.state.likedPosts}</Text>
             </View>
         );
 	}
