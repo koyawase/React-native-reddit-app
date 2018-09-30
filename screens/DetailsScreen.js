@@ -32,6 +32,17 @@ class DetailsScreen extends Component{
     
     render() {
 
+        const likeButton = <Button 
+        onPress={() => this.likePost()}
+        title="Like Post"
+        color="grey"
+        />;
+
+        const unlikeButton = <Button 
+        onPress={() => this.unlikePost()}
+        title="Unlike Post"
+        />;
+
         return (
             <View>
                 <Card
@@ -55,18 +66,7 @@ class DetailsScreen extends Component{
 
                 <Text style={styles.spacing}></Text>
 
-                <Button 
-                onPress={() => this.likePost()}
-                title="Like Post"
-                color="grey"
-                />
-
-                <Text style={styles.spacing}></Text>
-
-                <Button 
-                onPress={() => this.unlikePost()}
-                title="Unlike Post"
-                />
+                {this.state.key == ''? likeButton : unlikeButton}
                 </Card>
             </View>
                 
@@ -76,11 +76,19 @@ class DetailsScreen extends Component{
     
     likePost(){
         firebase.database().ref('/users/'+firebase.auth().currentUser.uid).push(this.state.post);
+        firebase.database().ref('/users/'+firebase.auth().currentUser.uid).on('value', (childSnapshot) => {
+            childSnapshot.forEach((val) => {
+                if(val.toJSON().permalink == this.state.post.permalink){
+                    this.setState({key: val.key});
+                }
+            });
+        })
     }
 
     unlikePost(){
         if(this.state.key != ''){
             firebase.database().ref('/users/'+firebase.auth().currentUser.uid).child(this.state.key).remove();
+            this.setState({key: ''});
         }
     }
 }

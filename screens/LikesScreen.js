@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import firebase from 'firebase';
-import { FlatList } from 'react-native';
+import { FlatList, Button } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 
 class LikesScreen extends Component{
@@ -17,6 +17,7 @@ class LikesScreen extends Component{
     }
 
     fetchData = async() =>{
+        this.setState({likedPosts: []});
         firebase.database().ref('/users/'+firebase.auth().currentUser.uid).on('value', (childSnapshot) => {
             childSnapshot.forEach((val) => {
                 this.setState({ likedPosts: this.state.likedPosts.concat(val.toJSON()) })
@@ -42,7 +43,6 @@ class LikesScreen extends Component{
                         />
                     )}
                 />
-
             </List>
         );
 	}
