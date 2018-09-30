@@ -19,8 +19,11 @@ class LikesScreen extends Component{
     fetchData = async() =>{
         this.setState({likedPosts: []});
         firebase.database().ref('/users/'+firebase.auth().currentUser.uid).on('value', (childSnapshot) => {
+            //EVERY TIME FIREBASE CHANGES, THIS IS CALLED. FETCHDATA NOT CALLED RATHER THE INSIDE OF THIS FUNCTION
+            //RESETTING LIKEDPOSTS HERE MAKES SENSE LOGICALLY BUT DOES NOT ACTUALLY WORK
+            this.setState({likedPosts: []});
             childSnapshot.forEach((val) => {
-                this.setState({ likedPosts: this.state.likedPosts.concat(val.toJSON()) })
+                this.setState({ likedPosts: [...this.state.likedPosts, val.toJSON()]});
             });
         })
     }
