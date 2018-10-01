@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import firebase from 'firebase'
 
 class ProfileScreen extends Component{
@@ -22,6 +22,15 @@ class ProfileScreen extends Component{
         );
     }
 
+    logout(){
+        try {
+            firebase.auth().signOut();
+            this.props.navigation.popToTop();
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     render() {
 
         return (
@@ -35,6 +44,10 @@ class ProfileScreen extends Component{
                 >
                 <Text>{'Logged in as ' + firebase.auth().currentUser.email}</Text>
                 <Text>{'Liked posts ' + this.state.likedPosts}</Text>
+                <Button 
+                title="Log out"
+                onPress={() => this.logout()}
+                />
             </View>
         );
 	}

@@ -9,6 +9,10 @@ class LoginScreen extends Component{
         header: null
     }
     
+    componentWillUpdate(){
+        console.log("entered page");
+    }
+
     login = () => {
         if(this.state.email == '' || this.state.password == ''){
             alert('Please fill in the fields');
